@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>CREATE A BLOG POST</h1>
+<form action="/newpost" method="post">
+
+        <label for="title_field">TITLE OF YOUR POST:</label><br />
+        <input id="title_field" name="title" type="text" value="{{ new_entry_title }}"><br />
+        <label for="body_field">WHAT DO YOU HAVE TO SAY?</label><br />
+        <textarea rows="10" cols="100" id="body_field" name="body" >{{ new_entry_body }}</textarea>
+
+    <input id="submit_button" type="submit" value="POST!">
+</form>
+
+{% endblock %}
