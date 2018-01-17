@@ -20,7 +20,7 @@ class Entry(db.Model):
         self.title = title
         self.body = body
     
-    def is_valid(self):
+    def validate(self):
         if self.title and self.body:
             return True
         else:
@@ -50,10 +50,9 @@ def newpost():
         new_post_body = request.form['body']
         new_post = Entry(new_post_title, new_post_body)
 
-        if new_post.is_valid():
+        if new_post.validate():
             db.session.add(new_post)
             db.session.commit()
-
             url = "/blog?id=" + str(new_post.id)
             return redirect(url)
         else:
