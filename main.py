@@ -10,7 +10,6 @@ app.secret_key = '02gn28h05j'
 
 class Blog(db.Model):
     __tablename__ = 'blog'
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
     body = db.Column(db.String(1200))
@@ -23,7 +22,6 @@ class Blog(db.Model):
 
 class User(db.Model):
     __tablename__ = 'user'
-
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
     password = db.Column(db.String(20))
@@ -84,11 +82,8 @@ def logout():
 
 @app.route('/')
 def index():
-    #owner = User.query.filter_by(username=session['username']).first()
     users = User.query.all()
-
     return render_template("index.html", users=users)
-
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def posting():
@@ -107,17 +102,14 @@ def posting():
         new_blog = Blog(title, body, owner)
         db.session.add(new_blog)
         db.session.commit()
-
         blogs = Blog.query.all()
-
         new_post = Blog.query.get(len(blogs))
 
-        return render_template('postblog.html', blogs=blogs, post=new_post)
+        return render_template('postblog.html', blogs=blogs, post=new_post)    
     else:
         return render_template('newpost.html')
 
     blogs = Blog.query.all()
-
     return render_template('blog.html', blogs=blogs)
 
 @app.route('/blog')
